@@ -13,7 +13,6 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class MqttPublishSample implements MqttCallback {
 
 	ArrayList<Medicao> medicoes = new ArrayList<>();
-	Medicao m1 = new Medicao ("a", "b", "c", "d");
 	String topic = "sid_lab_2018";
 	String content = "Message from MqttPublishSample";
 	int qos = 2;
@@ -22,7 +21,6 @@ public class MqttPublishSample implements MqttCallback {
 	MqttClient sampleClient;
 
 	public MqttPublishSample() {
-		medicoes.add(m1);
 		try {
 			sampleClient = new MqttClient(broker, clientId);
 			MqttConnectOptions connOpts = new MqttConnectOptions();
@@ -33,20 +31,17 @@ public class MqttPublishSample implements MqttCallback {
 			MqttMessage message = new MqttMessage(content.getBytes());
 			message.setQos(qos);
 			sampleClient.setCallback(this);
-
 			sampleClient.subscribe(topic);
 			System.out.println("Subscribed to " + topic);
 			try {
-				System.in.read();
+				System.in.read();				
 				System.out.println(123445);
 			} catch (IOException e) {
 			}
 			sampleClient.disconnect();
 			System.out.println("disconnected");
 			System.exit(0);
-		}catch(
-
-	MqttException me)
+		}catch(MqttException me)
 	{
 		System.out.println("reason " + me.getReasonCode());
 		System.out.println("msg " + me.getMessage());
@@ -59,12 +54,12 @@ public class MqttPublishSample implements MqttCallback {
 
 	@Override
 	public void messageArrived(String arg0, MqttMessage arg1) throws Exception {
+		
 		System.out.println(topic);
-		System.out.println(arg1.toString());
 		String[] msg = arg1.toString().split(",");
-		System.out.println("ola");
+		Medicao m1 = new Medicao (msg[0].split(":")[1], msg[1].split(":")[1], msg[2].split(":")[1],msg[3].split(":")[1]);
+		medicoes.add(m1);
 		new MongoConnect(medicoes.get(medicoes.size() - 1));
-		System.out.println("adeus");
 	}
 
 	@Override

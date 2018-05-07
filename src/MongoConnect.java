@@ -10,13 +10,11 @@ public class MongoConnect {
 	private Medicao m;
 	private BasicDBObject obj;
 	public MongoConnect(Medicao m) {
-		System.out.println("0");
 		this.m = m;
 		start();
 	}
 	public void start(){
 		try{
-			System.out.println(1);
 			// To connect to mongodb server
 			MongoClient mongoClient = new MongoClient();
 
@@ -29,14 +27,13 @@ public class MongoConnect {
 			createDocument();
 			colltemp.save(obj);
 //			collection.insert(obj);
-			
 			DBCursor cursor = colltemp.find();
 			while (cursor.hasNext()) {
 			DBObject obj = cursor.next();
 				System.out.println(obj);				
 			}
 //			colltemp.drop();
-			System.out.println(2);
+			
 			//boolean auth = db.authenticate(myUserName, myPassword);
 			//	System.out.println("Authentication: "+auth);
 
