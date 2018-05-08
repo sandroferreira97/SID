@@ -1,6 +1,13 @@
+import java.io.Serializable;
 
-public class Medicao {
+import com.mongodb.DBObject;
 
+public class Medicao implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String temperatura = new String();
 	private String humidade = new String(); 
 	private String data = new String(); 
@@ -14,6 +21,9 @@ public class Medicao {
 		this.hora = hora;
 	}
 
+	public Medicao(DBObject a) {
+		
+	}
 
 	@Override
 	public String toString() {

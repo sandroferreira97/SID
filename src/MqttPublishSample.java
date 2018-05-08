@@ -19,6 +19,7 @@ public class MqttPublishSample implements MqttCallback {
 	String broker = "tcp://iot.eclipse.org:1883";
 	String clientId = "JavaSample";
 	MqttClient sampleClient;
+	boolean val = false;
 
 	public MqttPublishSample() {
 		try {
@@ -34,32 +35,35 @@ public class MqttPublishSample implements MqttCallback {
 			sampleClient.subscribe(topic);
 			System.out.println("Subscribed to " + topic);
 			try {
-				System.in.read();				
+				System.in.read();
 				System.out.println(123445);
 			} catch (IOException e) {
 			}
 			sampleClient.disconnect();
 			System.out.println("disconnected");
 			System.exit(0);
-		}catch(MqttException me)
-	{
-		System.out.println("reason " + me.getReasonCode());
-		System.out.println("msg " + me.getMessage());
-		System.out.println("loc " + me.getLocalizedMessage());
-		System.out.println("cause " + me.getCause());
-		System.out.println("excep " + me);
-		me.printStackTrace();
-	}
+		} catch (MqttException me) {
+			System.out.println("reason " + me.getReasonCode());
+			System.out.println("msg " + me.getMessage());
+			System.out.println("loc " + me.getLocalizedMessage());
+			System.out.println("cause " + me.getCause());
+			System.out.println("excep " + me);
+			me.printStackTrace();
+		}
 	}
 
 	@Override
 	public void messageArrived(String arg0, MqttMessage arg1) throws Exception {
-		
-		System.out.println(topic);
-		String[] msg = arg1.toString().split(",");
-		Medicao m1 = new Medicao (msg[0].split(":")[1], msg[1].split(":")[1], msg[2].split(":")[1],msg[3].split(":")[1]);
-		medicoes.add(m1);
-		new MongoConnect(medicoes.get(medicoes.size() - 1));
+
+		if (val) {
+			System.out.println(topic);
+			String[] msg = arg1.toString().split(",");
+			Medicao m1 = new Medicao(msg[0].split(":")[1], msg[1].split(":")[1], msg[2].split(":")[1],
+					msg[3].split(":")[1]);
+			medicoes.add(m1);
+			new MongoConnect(medicoes.get(medicoes.size() - 1));
+		}
+		val=true;
 	}
 
 	@Override
