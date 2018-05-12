@@ -23,10 +23,11 @@ public class Medicao implements Serializable{
 
 	public Medicao(DBObject a) {
 		String info = a.toString();
-		this.temperatura = info.split(",")[1].split(":")[1].replace("'", "");
-		this.humidade = info.split(",")[2].split(":")[1].replace("'", "");
-		this.data = info.split(",")[3].split(":")[1].replace("'", "");
-		this.hora = info.split(",")[4].split(":")[1].replace("}","").replace("'", "");
+		this.temperatura = info.split(",")[1].split(":")[1].replace("'", "").replace(" ","");
+		this.humidade = info.split(",")[2].split(":")[1].replace("'", "").replace(" ","");
+		this.data = info.split(",")[3].split(":")[1].replace("'", "").replace(" ","");
+		this.hora = (info.split(",")[4].split(":")[1]+info.split(",")[4].split(":")[2]+info.split(",")[4].split(":")[3]).replace("}","").replace("'", "").replace(" ","");
+		
 		System.out.println(temperatura);
 		System.out.println(humidade);
 		System.out.println(data);

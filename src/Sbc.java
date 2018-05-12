@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,23 +39,31 @@ public class Sbc {
 				collection.save(medicoes.get(i));
 				System.out.println(medicoes.get(i).toString());			
 				Medicao a = new Medicao(medicoes.get(i));
+				String dbUrl;
+				dbUrl = "jdbc:sqlanywhere:Tds:localhost:2638?eng=Grupo33";
+				Connection conn = DriverManager.getConnection (dbUrl,"dba", "sql");
 				
-				
-				
-				Connection conn = 
-						   DriverManager.getConnection("jdbc:sybase:Tds:localhost:5000", 
-						     "username", "password");
-				
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO  Friends values (?,?,?,?)");
-				
-				//alterar de acordo com a tabela do sybase, ((Como fica o ID??))
-				ps.setString(1, "Joan");
-				ps.setString(2, "Smith");
-				ps.setObject(3, "  ");
-				ps.setString(4, "123-456-7890");
+				String query = "SELECT * FROM HumidadeTemperatura";
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				int max=0;
+				while(rs.next()) {
+					if(max<Integer.valueOf(rs.getString(1))) {
+						max=Integer.valueOf(rs.getString(1));
+					};
+				}
+				int id = max +1;
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO  HumidadeTemperatura values (?,?,?,?,?)");
+				ps.setInt(1, max);
+				ps.setObject(2, a.getData().replace("\"", ""));
+				ps.setObject(3,a.getHora().replace("\"", ""));
+				System.out.println(a.getTemperatura().replace("\"", ""));
+				ps.setDouble(4, Double.valueOf(a.getTemperatura().replace("\"", "")));
+				ps.setDouble(5, Double.valueOf(a.getHumidade().replace("\"", "")));
 				ps.executeUpdate();
 
 			}
+			
 		}catch(Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
