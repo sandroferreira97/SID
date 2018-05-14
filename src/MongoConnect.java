@@ -22,20 +22,11 @@ public class MongoConnect {
 			DB db = mongoClient.getDB( "medicao" );
 			System.out.println("Connect to database successfully");
 			DBCollection colltemp = db.getCollection("Temp");
-//			DBCollection collection = db.getCollection("Perm");
-		//	System.out.println("Collection mycol created successfully");
 			createDocument();
 			colltemp.save(obj);
-//			collection.insert(obj);
-			DBCursor cursor = colltemp.find();
-			while (cursor.hasNext()) {
-			DBObject obj = cursor.next();
-				System.out.println(obj);				
-			}
-//			colltemp.drop();
+			mongoClient.close();
+
 			
-			//boolean auth = db.authenticate(myUserName, myPassword);
-			//	System.out.println("Authentication: "+auth);
 
 		}catch(Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
