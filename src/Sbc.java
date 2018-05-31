@@ -33,7 +33,7 @@ public class Sbc {
 			DBCollection collection = db.getCollection("Perm");
 
 			List<DBObject> medicoes = colltemp.find().toArray();
-//			colltemp.drop();
+			colltemp.drop();
 			for (int i = 0; i < medicoes.size(); i++) {
 				collection.save(medicoes.get(i));
 				Medicao a = new Medicao(medicoes.get(i));
