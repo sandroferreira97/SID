@@ -6,7 +6,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/nunol/Downloads/mongo-java-driver-2.10.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/nunol/Downloads/org.eclipse.paho.client.mqttv3-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/SQL Anywhere 12/Java/sajdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sandro/Downloads/mongo-java-driver-3.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sandro/Downloads/org.eclipse.paho.client.mqttv3-1.0.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

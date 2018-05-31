@@ -33,11 +33,9 @@ public class Sbc {
 			DBCollection collection = db.getCollection("Perm");
 
 			List<DBObject> medicoes = colltemp.find().toArray();
-			colltemp.drop();
+//			colltemp.drop();
 			for (int i = 0; i < medicoes.size(); i++) {
-				System.out.println("TAMANHO        " + medicoes.size() + "          I        " + i);
 				collection.save(medicoes.get(i));
-				System.out.println(medicoes.get(i).toString());
 				Medicao a = new Medicao(medicoes.get(i));
 				String dbUrl;
 				dbUrl = "jdbc:sqlanywhere:Tds:localhost:2638?eng=Grupo33";
@@ -54,12 +52,11 @@ public class Sbc {
 				}
 				int id = max + 1;
 				PreparedStatement ps = conn.prepareStatement("INSERT INTO  HumidadeTemperatura values (?,?,?,?,?)");
-				ps.setInt(1, max);
-				ps.setObject(2, a.getData().replace("\"", ""));
-				ps.setObject(3, a.getHora().replace("\"", ""));
-				System.out.println(a.getTemperatura().replace("\"", ""));
-				ps.setDouble(4, Double.valueOf(a.getTemperatura().replace("\"", "")));
-				ps.setDouble(5, Double.valueOf(a.getHumidade().replace("\"", "")));
+				ps.setInt(1, id);
+				ps.setObject(2, a.getDdata());
+				ps.setObject(3, a.getTHora());
+				ps.setDouble(4, Double.valueOf(a.getTemperatura().split("'")[1]));
+				ps.setDouble(5, Double.valueOf(a.getHumidade().split("'")[1]));
 				ps.executeUpdate();
 			}
 
