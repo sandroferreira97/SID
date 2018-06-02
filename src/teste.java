@@ -9,7 +9,7 @@ public class teste {
 		 timer.schedule(new TimerTask() {
 		    @Override
 		    public void run() { 
-		    	Sbc a =new Sbc();
+		    	Sbc a =new Sbc("dba","sql");
 		    }
 		 }, 0, 1000 * 60 * MINUTES);
 		

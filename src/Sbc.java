@@ -17,11 +17,11 @@ public class Sbc {
 	private Medicao m;
 	private BasicDBObject obj;
 
-	public Sbc() {
-		start();
+	public Sbc(String nome,String pass) {
+		start(nome,pass);
 	}
 
-	public void start() {
+	public void start(String nome, String pass) {
 		try {
 			// To connect to mongodb server
 			MongoClient mongoClient = new MongoClient();
@@ -39,7 +39,7 @@ public class Sbc {
 				Medicao a = new Medicao(medicoes.get(i));
 				String dbUrl;
 				dbUrl = "jdbc:sqlanywhere:Tds:localhost:2638?eng=Grupo33";
-				Connection conn = DriverManager.getConnection(dbUrl, "dba", "sql");
+				Connection conn = DriverManager.getConnection(dbUrl, nome, pass);
 				String query = "SELECT * FROM HumidadeTemperatura";
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
