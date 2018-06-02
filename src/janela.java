@@ -12,13 +12,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JPasswordField;
 
 public class janela {
 
 	private JFrame frmMonitorizaoDeCulturas;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField username;
 	private int MINUTES = 2;
+	private JPasswordField password;
 
 	/**
 	 * Launch the application.
@@ -76,7 +78,7 @@ public class janela {
 				 timer.schedule(new TimerTask() {
 				    @Override
 				    public void run() { 
-				    	Sbc a = new Sbc(textField.getText(),textField_1.getText());
+				    	Sbc a = new Sbc(username.getText(),password.getText());
 				    }
 				 }, 0, 1000 * 60 * MINUTES);
 				
@@ -85,15 +87,14 @@ public class janela {
 		btnLogin.setBounds(310, 378, 97, 25);
 		frmMonitorizaoDeCulturas.getContentPane().add(btnLogin);
 		
-		textField = new JTextField();
-		textField.setBounds(166, 200, 241, 22);
-		frmMonitorizaoDeCulturas.getContentPane().add(textField);
-		textField.setColumns(10);
+		username = new JTextField();
+		username.setBounds(166, 200, 241, 22);
+		frmMonitorizaoDeCulturas.getContentPane().add(username);
+		username.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(166, 274, 241, 22);
-		frmMonitorizaoDeCulturas.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		password = new JPasswordField();
+		password.setBounds(166, 274, 241, 22);
+		frmMonitorizaoDeCulturas.getContentPane().add(password);
 		frmMonitorizaoDeCulturas.setBackground(Color.WHITE);
 		frmMonitorizaoDeCulturas.setForeground(Color.WHITE);
 		frmMonitorizaoDeCulturas.setTitle("Monitoriza\u00E7\u00E3o de Culturas em Laborat\u00F3rio");
@@ -102,12 +103,10 @@ public class janela {
 	}
 
 	public String getuser() {
-		return textField.getText();
+		return username.getText();
 	}
 
 	public String getpass() {
-		return textField_1.getText();
+		return password.getText();
 	}
-	
-	
 }
