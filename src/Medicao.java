@@ -12,7 +12,7 @@ public class Medicao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String temperatura = new String();
 	private String humidade = new String(); 
-	private java.sql.Date Ddata ;
+	private Date Ddata ;
 	private java.sql.Timestamp Thora ;
 	private String data = new String();
 	private String hora = new String();
@@ -27,10 +27,14 @@ public class Medicao implements Serializable{
 
 	public Medicao(DBObject a) {
 		String info = a.toString();
-		String x = info.split(",")[3].split(":")[1].split("'")[1].split("/")[2] + "-" + info.split(",")[3].split(":")[1].split("'")[1].split("/")[1] + "-" + info.split(",")[3].split(":")[1].split("'")[1].split("/")[0];
-		String y = info.split(",")[4].split(" : \"'")[1].replaceAll("'\" }", "");
-		this.temperatura = info.split(",")[1].split(":")[1];
-		this.humidade = info.split(",")[2].split(":")[1];
+		
+		String x = info.split(",")[3].split(":")[1].replace("\"","").replace("\\", "").replaceAll(" ", "").split("/")[2] + "-" + info.split(",")[3].split(":")[1].replace("\"","").replace("\\", "").replaceAll(" ", "").split("/")[1] + "-" + info.split(",")[3].split(":")[1].replace("\"","").replace("\\", "").replaceAll(" ", "").split("/")[0];
+		String y = info.split(",")[4].split(" : ")[1].replace("\"","").replace("\\", "").replaceAll(" }", "").replaceAll(" ", "");
+		System.out.println(x);
+		this.temperatura = info.split(",")[1].split(":")[1].replace("\"","").replace("\\", "").replaceAll(" ", "");
+		
+		this.humidade = info.split(",")[2].split(":")[1].replace("\"","").replace("\\", "").replaceAll(" ", "");
+		
 		this.Ddata = Date.valueOf(x);
 		this.Thora = Timestamp.valueOf(x + " " + y);
 		

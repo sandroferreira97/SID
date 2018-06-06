@@ -33,13 +33,13 @@ public class Sbc {
 			DBCollection collection = db.getCollection("Perm");
 
 			List<DBObject> medicoes = colltemp.find().toArray();
-			colltemp.drop();
+//			colltemp.drop();
 			for (int i = 0; i < medicoes.size(); i++) {
 				collection.save(medicoes.get(i));
 				Medicao a = new Medicao(medicoes.get(i));
 				String dbUrl;
 				dbUrl = "jdbc:sqlanywhere:Tds:localhost:2638?eng=Grupo33";
-				Connection conn = DriverManager.getConnection(dbUrl, nome, pass);
+				Connection conn = DriverManager.getConnection(dbUrl, "dba", "sql");
 				String query = "SELECT * FROM HumidadeTemperatura";
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
@@ -55,8 +55,8 @@ public class Sbc {
 				ps.setInt(1, id);
 				ps.setObject(2, a.getDdata());
 				ps.setObject(3, a.getTHora());
-				ps.setDouble(4, Double.valueOf(a.getTemperatura().split("'")[1]));
-				ps.setDouble(5, Double.valueOf(a.getHumidade().split("'")[1]));
+				ps.setDouble(4, Double.valueOf(a.getTemperatura()));
+				ps.setDouble(5, Double.valueOf(a.getHumidade()));
 				ps.executeUpdate();
 			}
 

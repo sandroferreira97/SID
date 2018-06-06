@@ -1,3 +1,4 @@
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JPasswordField;
 
-public class janela {
+public class Janela {
 
 	private JFrame frmMonitorizaoDeCulturas;
 	private JTextField username;
@@ -29,7 +30,7 @@ public class janela {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					janela window = new janela();
+					Janela window = new Janela();
 					window.frmMonitorizaoDeCulturas.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +42,7 @@ public class janela {
 	/**
 	 * Create the application.
 	 */
-	public janela() {
+	public Janela() {
 		initialize();
 	}
 

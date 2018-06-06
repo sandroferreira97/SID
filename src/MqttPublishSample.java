@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -59,7 +58,7 @@ public class MqttPublishSample implements MqttCallback {
 			System.out.println(topic);
 			String[] msg = arg1.toString().split(",");
 			Medicao m1 = new Medicao(msg[0].split(":")[1], msg[1].split(":")[1], msg[2].split(":")[1],
-					msg[3].split("time':")[1]);
+					msg[3].split("time\":")[1].replaceAll("}", ""));
 			medicoes.add(m1);
 			new MongoConnect(medicoes.get(medicoes.size() - 1));
 		}
